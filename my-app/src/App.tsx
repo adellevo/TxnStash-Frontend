@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
+import Wrapper from "Wrapper";
 
 function App() {
   const [data, setData] = useState([]);
@@ -20,11 +21,13 @@ function App() {
   };
 
   return (
+    <Wrapper>
     <div>
       {data.map((member, index) => (
         <p key={index}>{member}</p>
       ))}
     </div>
+    </Wrapper>
   );
 }
 
