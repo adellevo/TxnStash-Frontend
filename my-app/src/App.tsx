@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 import Wrapper from "Wrapper";
+import { RouterProvider } from "react-router-dom";
+import { BaseRouter } from "BaseRouter";
 
 function App() {
   const [data, setData] = useState([]);
@@ -22,11 +24,12 @@ function App() {
 
   return (
     <Wrapper>
-    <div>
+      <RouterProvider router={BaseRouter()} />
+    {/* <div>
       {data.map((member, index) => (
         <p key={index}>{member}</p>
       ))}
-    </div>
+    </div> */}
     </Wrapper>
   );
 }

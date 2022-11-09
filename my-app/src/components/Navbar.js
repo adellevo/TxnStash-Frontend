@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from './Logo';
 import { FaGithub } from 'react-icons/fa';
 import { useState } from 'react';
+import { BASE_STYPES } from 'styles/baseStyles';
 const nav_items = [
     {
         name: 'Stashes',
@@ -45,6 +46,10 @@ export default function Navbar(props) {
                                 <FaGithub className=" hover:text-blac " />
                             </a>
                         </p>
+                        <button
+                            className={BASE_STYPES.BASE_BUTTON}
+                        >
+                        </button>
                     </ul>
                 </div>
             </div>
