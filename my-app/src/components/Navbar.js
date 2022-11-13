@@ -2,11 +2,11 @@ import React from 'react';
 import Logo from './Logo';
 import { FaGithub } from 'react-icons/fa';
 import { useState } from 'react';
-import { BASE_STYPES } from 'styles/baseStyles';
+import { BASE_TYPES } from 'styles/baseStyles';
 const nav_items = [
     {
         name: 'Stashes',
-        path: '/'
+        path: '/account'
     },
     {
         name: 'Create',
@@ -37,17 +37,17 @@ export default function Navbar(props) {
                 <div className={`${isOpen} w-full md:block md:w-auto items-center`} id="mobile-menu">
                     <ul className="flex flex-col items-center mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
                         {nav_items.map((item, i) => (
-                            <li className='block py-2 pr-4 pl-3 text-white hover:bg-white hover:text-blac rounded-lg' >
+                            <li className='block py-2 pr-4 pl-3 text-white hover:underline hover:text-blac rounded-lg' >
                                 <a href={item.path} className=" ">{item.name}</a>
                             </li>
                         ))}
-                        <p className="text-white text-3xl p-2 m-3 rounded-xl hover:bg-white hover:text-blac ">
+                        <p className="text-white text-3xl p-2 m-3 rounded-xl hover:text-underline  ">
                             <a href="https://github.com/adellevo/365-final-frontend">
                                 <FaGithub className=" hover:text-blac " />
                             </a>
                         </p>
                         <button
-                            className={BASE_STYPES.BASE_BUTTON}
+                            className={BASE_TYPES.BASE_BUTTON}
                         >
                         </button>
                     </ul>
