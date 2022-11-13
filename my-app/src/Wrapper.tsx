@@ -13,6 +13,7 @@ import {
 } from '@manahippo/aptos-wallet-adapter';
 import { ReactNode, useState, useMemo } from 'react';
 import WalletModal from 'modals/walletModal';
+import { AccountContextProvider } from 'AccountContext';
 
 type WrapperProps = {
   children: NonNullable<ReactNode>;
@@ -22,7 +23,7 @@ const Wrapper: React.FC<WrapperProps> = ({
   children,
 }) => {
   const [walletModalOpen, setWalletModal] = useState(false);
-  
+
 
   const wallets = useMemo(
     () => [
@@ -34,16 +35,20 @@ const Wrapper: React.FC<WrapperProps> = ({
   );
 
   return (
-         <WalletProvider
+    <WalletProvider
       wallets={wallets}
       autoConnect={false}
       onError={(error) => {
         console.log('wallet errors: ', error);
       }}>
-          <Navbar showConnectModal={setWalletModal} />
-          {children}
-          {walletModalOpen ? <WalletModal isOpen={walletModalOpen} setIsOpen={setWalletModal} /> : null}
-          </WalletProvider>
+      <AccountContextProvider value={null}>
+        <Navbar showConnectModal={setWalletModal} />
+        {children}
+        {walletModalOpen ? <WalletModal isOpen={walletModalOpen} setIsOpen={setWalletModal} /> : null}
+        {/* <button onClick={() => setWalletModal(true)}>Open Wallet Modal</button> */}
+
+      </AccountContextProvider>
+    </WalletProvider>
   );
 }
 
