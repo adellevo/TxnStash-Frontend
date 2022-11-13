@@ -3,6 +3,9 @@ import SignUpView from "../components/SignUpView";
 import { login, signup } from "hooks/useUser";
 import { useState } from "react";
 import { useAccountContext } from "AccountContext";
+import { Link } from "react-router-dom";
+import { BASE_TYPES } from "styles/baseStyles";
+import AccountWallets from "components/AccountWallets";
 
 
 const AccountPage = () => {
@@ -14,11 +17,15 @@ const AccountPage = () => {
 
     return (
         <div className="items-center justify-center">
-            {account? <h1>Logged in as {account}</h1> : <h1>Not logged in</h1>}
-            <SignUpView />
+            {account? <h1>Logged in as {account}</h1> : 
+                <div className="flex flex-col items-center justify-center p-2">
             
-            <p>-------Or Login -------</p>
-            <LoginView />
+            <p className="text-center">Not logged in</p>
+            <Link to="auth">
+            <button className={BASE_TYPES.BASE_BUTTON}>Authenticate</button>
+            </Link>
+            </div>}
+            <AccountWallets/>
         </div>
 
     )

@@ -14,6 +14,7 @@ import {
 import { ReactNode, useState, useMemo } from 'react';
 import WalletModal from 'modals/walletModal';
 import { AccountContextProvider } from 'AccountContext';
+import { BASE_TYPES } from 'styles/baseStyles';
 
 type WrapperProps = {
   children: NonNullable<ReactNode>;
@@ -35,6 +36,7 @@ const Wrapper: React.FC<WrapperProps> = ({
   );
 
   return (
+      <div className={`h-screen flex flex-col items-center justify-start ${BASE_TYPES.BG_GRADIENT}`}>
     <WalletProvider
       wallets={wallets}
       autoConnect={false}
@@ -49,6 +51,7 @@ const Wrapper: React.FC<WrapperProps> = ({
 
       </AccountContextProvider>
     </WalletProvider>
+    </div>
   );
 }
 
