@@ -8,19 +8,19 @@ import { BaseRouter } from "BaseRouter";
 function App() {
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    getMembers();
-  }, []);
+  // useEffect(() => {
+  //   getMembers();
+  // }, []);
 
-  const getMembers = async () => {
-    try {
-      const route = "http://localhost:5000/members";
-      const res = await axios.get(route);
-      setData(res.data.members);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const getMembers = async () => {
+  //   try {
+  //     const route = "http://localhost:5000/members";
+  //     const res = await axios.get(route);
+  //     setData(res.data.members);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   return (
     <Wrapper>
