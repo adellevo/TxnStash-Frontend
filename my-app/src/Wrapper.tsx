@@ -26,7 +26,8 @@ const Wrapper: React.FC<WrapperProps> = ({
   );
 
   return (
-      <div className={`h-screen flex flex-col items-center justify-start ${BASE_TYPES.BG_GRADIENT}`}>
+      <div className={`min-h-screen w-full flex flex-col items-center justify-start ${BASE_TYPES.BG_GRADIENT}`}>
+        <Navbar/>
     <WalletProvider
       wallets={wallets}
       autoConnect={false}
