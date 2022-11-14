@@ -46,10 +46,6 @@ export default function Navbar(props) {
                                 <FaGithub className=" hover:text-blac " />
                             </a>
                         </p>
-                        <button
-                            className={BASE_TYPES.BASE_BUTTON}
-                        >
-                        </button>
                     </ul>
                 </div>
             </div>

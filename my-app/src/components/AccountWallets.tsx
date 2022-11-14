@@ -5,7 +5,9 @@
 import { useAccountContext } from "AccountContext";
 import { MOCK_INFO } from "data/mock_info";
 import { loadWallets } from "hooks/useUser";
+import LinkWallet from "modals/LinkWallet";
 import { useEffect, useState } from "react";
+import { BASE_TYPES } from "styles/baseStyles";
 
 const AccountWallets =  () => {
     const [wallets, setWallets] = useState<any[]>([]);
@@ -32,7 +34,7 @@ const AccountWallets =  () => {
             })}
             <div>
             <p className="text-center text-2xl">Add New Wallet</p>
-            <button className="w-full bg-white bg-opacity-10 rounded-2xl p-3">Connect Wallet</button>
+            <LinkWallet/>
             </div>
         </div>
     );

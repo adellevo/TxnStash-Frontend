@@ -21,8 +21,8 @@ const AccountPage = () => {
                 <div className="flex flex-col items-center justify-center p-2">
             
             <p className="text-center">Not logged in</p>
-            <Link to="auth">
-            <button className={BASE_TYPES.BASE_BUTTON}>Authenticate</button>
+            <Link to="/auth">
+                <button className={BASE_TYPES.BASE_BUTTON}>Authenticate</button>
             </Link>
             </div>}
             <AccountWallets/>
