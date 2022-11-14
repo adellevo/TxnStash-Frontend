@@ -2,22 +2,36 @@ import LoginView from "../components/LoginView";
 import SignUpView from "../components/SignUpView";
 import { login, signup } from "hooks/useUser";
 import { useState } from "react";
-import { useAccountContext } from "AccountContext";
-
+import { useUserContext } from "UserContext";
+import { BASE_TYPES } from "styles/baseStyles";
 
 const AuthPage = () => {
-    const {account} = useAccountContext();
+  const { user, login, logout } = useUserContext();
 
-    return (
-        <div className="items-center justify-center">
-            {account? <h1>Logged in as {account}</h1> : <h1>Not logged in</h1>}
-            <SignUpView />
-            
-            <p className="text-center">-------Or Login -------</p>
-            <LoginView />
+  const onLogout = () => {};
+
+  console.log(user);
+
+  return (
+    <div className="items-center justify-center">
+      {user ? (
+        <div>
+          <h1>Logged in as {user.username}</h1>
+          <button className={BASE_TYPES.BASE_BUTTON} onClick={() => logout()}>
+            Log out
+          </button>
         </div>
+      ) : (
+        <div>
+          <h1 className="text-center text-2xl">Not logged in</h1>
+          <SignUpView />
 
-    )
-}
+          <p className="text-center">-------Or Login -------</p>
+          <LoginView />
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default AuthPage;
