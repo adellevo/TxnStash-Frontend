@@ -14,7 +14,7 @@ const AccountStashes = () => {
 
   return (
     <div className="w-1/2 items-center p-2">
-      <h1>Account Stashes</h1>
+      <h1>Your Stashes</h1>
       <div className="flex flex-col">
         {stashes.map((stash: Stash) => StashPreview(stash, loadStash))}
       </div>

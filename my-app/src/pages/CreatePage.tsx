@@ -36,7 +36,17 @@ const CreatePage = () => {
             {/* SELECT WALLET TO CREATE STASH FROM */}
             <div className="flex flex-row justify-between p-3 justify-start">
                 <div>
-                    <p>Select A Wallet to Import Transactions From</p>
+                    <p className="font-bold">Select A Wallet to Import Transactions From</p>
+                    <select
+                        className={BASE_TYPES.BASE_INPUT}
+                    >
+                        {user_wallets.map((wallet:any)=>{
+                         return(
+                            <option value={wallet.address}>{wallet.address}</option>
+                         )
+                        })
+                        }
+                    </select>
                     {walletTransactions.map((txn: any) => {
                         return (
                             <button
@@ -44,9 +54,14 @@ const CreatePage = () => {
                              className={BASE_TYPES.BASE_BUTTON}>
                                 <div>
                                     {TxnPayload(txn.payload)}
+                                    <div className="flex flex-row justify-between">
+                                    <p>events: {txn.events.length}</p>    
+                                    <p>changes: {txn.changes.length}</p>
+                                    </div>
+                                    <div className="flex flex-col items-end">
                                     <p>gas: {txn.gas_used}</p>
                                     <p>time: {txn.timestamp}</p>
-                                    <p>changes: {txn.events.length}</p>
+                                    </div>
                                 </div>
                             </button>
                         )
@@ -62,7 +77,19 @@ const CreatePage = () => {
                             </div>
                         )})
                     }
+                    <button
+                        className={BASE_TYPES.BASE_BUTTON + " w-full"}
+                        onClick = {()=>setSelectedTransactions([])}
+                        > Clear </button>
                     <div className="flex flex-col justify-center">
+                        {/* STASH PREVIEW */}
+                        <div className={BASE_TYPES.BASE_DIV}>
+                        <p className="text-xl font-bold text-center">Stash Preview</p>
+                        <p>Txn count: {selectedTransactions.length}</p>
+                        <p>Total events: {selectedTransactions.reduce((prev,current)=>prev+current.events.length,0)}</p>
+                        <p>Total changes: {selectedTransactions.reduce((prev,current)=>prev+current.changes.length,0)}</p>
+                        <p>Total gas: {selectedTransactions.reduce((prev,current)=>prev+Number(current.gas_used),0)}</p>
+                        </div>
                     <input type="text"
                         className={BASE_TYPES.BASE_INPUT}
                         placeholder="Name for Stash"
@@ -70,6 +97,8 @@ const CreatePage = () => {
                     >
 
                     </input>
+
+
                     <button
                         // onClick={}
                         className={BASE_TYPES.BASE_BUTTON}> Create Stash</button>
