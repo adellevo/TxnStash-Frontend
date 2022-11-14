@@ -2,24 +2,21 @@
 // this is used in the account page
 // this component also handles the linking of new wallets
 
-import { useAccountContext } from "AccountContext";
 import { MOCK_INFO } from "data/mock_info";
 import { loadWallets } from "hooks/useUser";
 import LinkWallet from "modals/LinkWallet";
 import { useEffect, useState } from "react";
 import { BASE_TYPES } from "styles/baseStyles";
 
-const AccountWallets =  () => {
-    const [wallets, setWallets] = useState<any[]>([]);
+const AccountWallets = () => {
+  const [wallets, setWallets] = useState<any[]>([]);
 
-    useEffect(() => {
-        const user_wallets = loadWallets(0);
-        setWallets(user_wallets);
-    }, [])
+  useEffect(() => {
+    const user_wallets = loadWallets(0);
+    setWallets(user_wallets);
+  }, []);
 
 
-    const {account} = useAccountContext();
-    
     
     return (
         <div>

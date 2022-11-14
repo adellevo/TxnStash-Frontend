@@ -1,26 +1,29 @@
-import React from 'react';
-import Logo from './Logo';
-import { FaGithub } from 'react-icons/fa';
-import { useState } from 'react';
-import { BASE_TYPES } from 'styles/baseStyles';
+import React from "react";
+import Logo from "./Logo";
+import { FaGithub } from "react-icons/fa";
+import { useState } from "react";
+import { BASE_TYPES } from "styles/baseStyles";
 const nav_items = [
-    {
-        name: 'Stashes',
-        path: '/account'
-    },
-    {
-        name: 'Create',
-        path: '/create'
-    },
-    {
-        name: 'docs',
-        path: '/docs',
-    },
+  {
+    name: "Stashes",
+    path: "/account",
+  },
+  {
+    name: "Create",
+    path: "/create",
+  },
+  {
+    name: "Login",
+    path: "/auth",
+  },
+  // {
+  //     name: 'docs',
+  //     path: '/docs',
+  // },
 ];
 
-
 export default function Navbar(props) {
-    const [isOpen, setIsOpen] = useState('hidden');
+  const [isOpen, setIsOpen] = useState("hidden");
 
     const toggle = () => {
         setIsOpen(isOpen === '' ? 'hidden' : '');

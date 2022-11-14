@@ -7,8 +7,6 @@ import {
   PontemWalletAdapter,
 } from '@manahippo/aptos-wallet-adapter';
 import { ReactNode, useState, useMemo } from 'react';
-import WalletModal from 'modals/LinkWallet';
-import { AccountContextProvider } from 'AccountContext';
 import { BASE_TYPES } from 'styles/baseStyles';
 
 type WrapperProps = {
@@ -35,13 +33,12 @@ const Wrapper: React.FC<WrapperProps> = ({
       onError={(error) => {
         console.log('wallet errors: ', error);
       }}>
-      <AccountContextProvider value={null}>
-        <Navbar  />
         {children}
-      </AccountContextProvider>
+        {/* <button onClick={() => setWalletModal(true)}>Open Wallet Modal</button> */}
+
     </WalletProvider>
     </div>
   );
-}
+};
 
 export default Wrapper;

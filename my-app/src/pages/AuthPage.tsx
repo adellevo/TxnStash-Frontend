@@ -4,7 +4,6 @@ import { login, signup } from "hooks/useUser";
 import { useState } from "react";
 
 const AuthPage = () => {
-
     return (
         <div className="items-center justify-center">
             
@@ -13,8 +12,7 @@ const AuthPage = () => {
             <p className="text-center">-------Or Login -------</p>
             <LoginView />
         </div>
-
-    )
-}
+  );
+};
 
 export default AuthPage;
