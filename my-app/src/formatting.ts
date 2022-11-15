@@ -5,7 +5,9 @@ export const parsePayloadFunction = (funct:string) => {
 }
 
 export const formatTimestamp = (time:string)=>{
-    const unix_ts = time;
+    const unix_ts = Number(time);
+    const diff = (Date.now()*1000 - unix_ts)/1000000/60/60
+    return diff.toFixed(1);
 }
 
 export const shortenAddress = (
