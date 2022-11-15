@@ -8,32 +8,30 @@ import { useEffect, useState } from "react";
 import { BASE_TYPES } from "styles/baseStyles";
 
 const AccountWallets = () => {
-    const [wallets, setWallets] = useState<any[]>([]);
+  const [wallets, setWallets] = useState<any[]>([]);
 
-    useEffect(() => {
-        const user_wallets = loadWallets(0);
-        setWallets(user_wallets);
-    }, []);
+  useEffect(() => {
+    const user_wallets = loadWallets(0);
+    setWallets(user_wallets);
+  }, []);
 
-
-
-    return (
-        <div>
-            <p className="text-3xl text-center font-bold"> Your Wallets</p>
-            {wallets.map((wallet: any) => {
-                return (
-                    <div className="bg-white bg-opacity-10 rounded-2xl p-3">
-                        <p>{wallet.name}</p>
-                        <p>{wallet.address}</p>
-                    </div>
-                )
-            })}
-            <div>
-                <p className="text-center text-2xl">Add New Wallet</p>
-                <LinkWallet />
-            </div>
-        </div>
-    );
-}
+  return (
+    <div>
+      <p className="text-3xl text-center font-bold"> Your Wallets</p>
+      {wallets.map((wallet: any, index) => {
+        return (
+          <div key={index} className="bg-white bg-opacity-10 rounded-2xl p-3">
+            <p>{wallet.name}</p>
+            <p>{wallet.address}</p>
+          </div>
+        );
+      })}
+      <div>
+        <p className="text-center text-2xl">Add New Wallet</p>
+        <LinkWallet />
+      </div>
+    </div>
+  );
+};
 
 export default AccountWallets;

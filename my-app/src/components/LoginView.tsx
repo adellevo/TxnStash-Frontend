@@ -5,7 +5,7 @@ import { useUserContext } from "UserContext";
 const LoginView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useUserContext();
+  // const { login } = useUserContext();
   return (
     <div className="items-center w-full p-4 m-3 outline-white">
       <h3 className="title">Login</h3>
@@ -42,8 +42,8 @@ const LoginView = () => {
           </label>
         </div>
         <button
-          //   onClick={() => login(username, password)}
-          onClick={() => login()}
+          onClick={() => login(username, password)}
+          // onClick={() => login()}
           className="button is-block is-info is-large  text-black is-fullwidth bg-white"
         >
           Login
