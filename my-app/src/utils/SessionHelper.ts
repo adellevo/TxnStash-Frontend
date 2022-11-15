@@ -1,11 +1,11 @@
-export const saveUser = (user: any) => {
-  sessionStorage.setItem("sessionData", JSON.stringify(user));
+export const saveUser = (token: any) => {
+  sessionStorage.setItem("sessionData", JSON.stringify(token));
   // sessionStorage.setItem("user", user);
   // sessionStorage.setItem("access_token", user.access_token);
 };
 
-export const clearUser = (user: any) => {
-  sessionStorage.removeItem("user");
+export const clearUser = () => {
+  sessionStorage.removeItem("sessionData");
 };
 
 export const getUser = () => {
