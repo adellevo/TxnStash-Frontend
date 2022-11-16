@@ -170,11 +170,33 @@ const CreatePage = () => {
             ></input>
 
             <button
-              onClick={()=>handleCreateStash()}
+              onClick={() => handleCreateStash()}
               className={BASE_TYPES.BASE_BUTTON}
             >
               Create Stash
             </button>
+
+            <p>Event Summary</p>
+            {selectedTransactions.map((tx: any) => {
+              const event_details = tx.events.filter(
+                (e: any) => e.type === "0x1::coin::DepositEvent"
+                  || e.type === "0x1::coin::WithdrawEvent"
+                  || e.type === "0x3::token::WithdrawEvent"
+                  || e.type === "0x3::token::DepositEvent").map((e: any) => {
+                    const quantity = parseFloat(e.data.amount);
+                    return (<div>
+                      <p>{quantity}</p>
+                    </div>)
+                  })
+
+              return (<div>
+                {event_details.map((e: any) => { return e })}
+              </div>)
+            })}
+
+
+
+
           </div>
         </div>
       </div>

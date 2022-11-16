@@ -43,12 +43,7 @@ export const signup = async (username: String, password: string) => {
 };
 
 export const addWallet = async (userId: String, wallet: any) => {
-  // const headers = formatHeaders();
-  const user_token = JSON.parse(getUser()!);
-    const headers = {
-    "Access-Control-Allow-Credentials": true,
-    Authorization: `Bearer ${user_token}`,
-  };
+  const headers = formatHeaders();
   const res = await axios.post(`${BACKEND_BASE_URL}/add-wallet`, {
     userId: userId,
     ...wallet
@@ -57,3 +52,14 @@ export const addWallet = async (userId: String, wallet: any) => {
   saveUserData(res.data.user);
   return res.data;
 };
+
+export const removeWallet = async (userId: String, walletId: number) => {
+  const headers = formatHeaders();
+  const res = await axios.post(`${BACKEND_BASE_URL}/remove-wallet`, {
+    userId: userId,
+    walletId: walletId
+  },{headers:headers});
+  console.log("REQUEST Result", res);
+  saveUserData(res.data.user);
+  return res.data;
+}

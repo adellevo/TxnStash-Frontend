@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { BASE_TYPES } from "styles/baseStyles";
 import AccountWallets from "components/AccountWallets";
 import AccountStashes from "components/AccountStashes";
-import { saveUser, clearUser, getUser } from "utils/SessionHelper";
+import { saveUser, clearUser, getUser, saveUserData } from "utils/SessionHelper";
 import axios from "axios";
 const BACKEND_BASE_URL = "http://localhost:5000";
 
@@ -24,7 +24,8 @@ const AccountPage = () => {
       url: `${BACKEND_BASE_URL}/profile`,
       headers: headers,
     });
-    setUser(res.data);
+    setUser(res.data.user);
+    saveUserData(res.data.user.access_token);
 
     console.log(user);
   };

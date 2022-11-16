@@ -15,6 +15,7 @@ const MOCK_ACCOUNT = {
   userId: 0,
   username: "mock-user",
   password: "pword",
+  wallets: MOCK_WALLETS,
 };
 
 export const MOCK_INFO = {
