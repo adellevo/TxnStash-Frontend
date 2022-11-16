@@ -7,25 +7,38 @@ import { BASE_TYPES } from "styles/baseStyles";
 import AccountWallets from "components/AccountWallets";
 import AccountStashes from "components/AccountStashes";
 import { saveUser, clearUser, getUser } from "utils/SessionHelper";
+import axios from "axios";
+const BACKEND_BASE_URL = "http://localhost:5000";
 
 const AccountPage = () => {
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [isLogin, setIsLogin] = useState(false);
-  const [user, setUser] = useState<any>({});
+  const [user, setUser] = useState<any>("");
+
+  const getData = async () => {
+    const headers = {
+      "Access-Control-Allow-Credentials": true,
+      Authorization: `Bearer ${JSON.parse(getUser()!)}`,
+    };
+
+    const res = await axios({
+      method: "GET",
+      url: `${BACKEND_BASE_URL}/profile`,
+      headers: headers,
+    });
+    setUser(res.data);
+
+    console.log(user);
+  };
 
   useEffect(() => {
-    // console.log(JSON.stringify(getUser()));
-    const sessionData = JSON.parse(getUser()!);
-    console.log(sessionData);
-    setUser(sessionData);
+    getData();
   }, []);
 
   return (
     <div className="items-center justify-center">
       {user ? (
-        <h1>Logged in as {user.username}</h1>
+        <h1>Logged in as {user}</h1>
       ) : (
+        // <h1>Logged in as {user.username}</h1>
         <div className="flex flex-col items-center justify-center p-2">
           <p className="text-center">Not logged in</p>
           <Link to="/auth">

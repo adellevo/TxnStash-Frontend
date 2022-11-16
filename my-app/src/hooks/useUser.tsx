@@ -26,7 +26,7 @@ export const login = async (username: String, password: string) => {
     // { headers: headers }
     // { withCredentials: true }
   );
-  saveUser(res.data.user);
+  saveUser(res.data.user.access_token);
   return res.data;
 };
 
