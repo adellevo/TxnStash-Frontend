@@ -1,6 +1,7 @@
 import axios from "axios";
 import { MOCK_INFO } from "data/mock_info";
-import { saveUser } from "utils/SessionHelper";
+import { formatHeaders } from "formatting";
+import { getUser, saveUser, saveUserData } from "utils/SessionHelper";
 const BACKEND_BASE_URL = "http://localhost:5000";
 export const loadStashes = async (userID: string) => {
   return [];
@@ -36,6 +37,23 @@ export const signup = async (username: String, password: string) => {
     password: password,
   });
   // console.log("REQUEST Result", res);
-  saveUser(res.data.user);
+  saveUser(res.data.user.auth_token);
+  saveUserData(res.data.user);
+  return res.data;
+};
+
+export const addWallet = async (userId: String, wallet: any) => {
+  // const headers = formatHeaders();
+  const user_token = JSON.parse(getUser()!);
+    const headers = {
+    "Access-Control-Allow-Credentials": true,
+    Authorization: `Bearer ${user_token}`,
+  };
+  const res = await axios.post(`${BACKEND_BASE_URL}/add-wallet`, {
+    userId: userId,
+    ...wallet
+  },{headers:headers});
+  console.log("REQUEST Result", res);
+  saveUserData(res.data.user);
   return res.data;
 };

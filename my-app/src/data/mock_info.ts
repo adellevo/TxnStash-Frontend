@@ -6,7 +6,7 @@ const MOCK_WALLETS = [
   {
     address: TEST_ACCOUNT_ADDRESS,
     userId: TEST_ACCOUNT_ID,
-    WalletId: TEST_ACCOUNT_ID,
+    walletId: 0,
     name: "Martian",
   },
 ];

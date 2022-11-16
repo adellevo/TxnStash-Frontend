@@ -1,6 +1,7 @@
 // const 
 
 import axios from "axios";
+import { getUser } from "utils/SessionHelper";
 
 
 // const getData = async () => {
@@ -43,15 +44,19 @@ import axios from "axios";
 //   return res.data;
 
 
-const sendCreateStash = (transactions:any[],stashName:String,userId:number,walletId:number) => {
+export const sendCreateStash = async (transactions:any[],stashName:String,userId:number,walletId:number) => {
       const headers = {
             "Access-Control-Allow-Credentials": true,
             Authorization: `Bearer ${JSON.parse(getUser()!)}`,
         };
       const res = await axios.post(
-    `${BACKEND_BASE_URL}/create-stash`,
-    {transactions:  
+    `${process.env.BACKEND_BASE_URL}/create-stash`,
+    {transactions:  transactions,
+      name: stashName,
+      userId: userId,
+      walletId: walletId,
     headers: headers,
     // payload: {transactions
   });
+
 }

@@ -1,13 +1,16 @@
 import { Types } from "aptos";
 import { formatTimestamp, parsePayloadFunction, shortenAddress } from "formatting";
 import { loadTxs } from "hooks/useAptos";
+import { sendCreateStash } from "hooks/useStash";
 import { loadWallets } from "hooks/useUser";
 import { useEffect, useState } from "react";
 import { BASE_TYPES } from "styles/baseStyles";
+import { getUser } from "utils/SessionHelper";
 
 const TEST_USER = "0x9ee9892d8600ed0bf65173d801ab75204a16ac2c6f190454a3b98f6bcb99d915";
 const CreatePage = () => {
   const user_wallets = loadWallets(0);
+  const user = getUser();
   const [selectedWallet, setSelectedWallet] = useState(user_wallets[0]);
   const [stashName, setStashName] = useState("");
   const [walletTransactions, setWalletTransactions] = useState<any[]>([]);
@@ -25,10 +28,10 @@ const CreatePage = () => {
 
   const handleCreateStash = () => {
     if (selectedTransactions.length !== 0 && stashName !== "") {
-      sendCreateStashTx(
+      sendCreateStash(
         selectedTransactions,
         stashName,
-        user.userId,
+        0,
         selectedWallet.walletId
       );
     } else {
@@ -167,10 +170,9 @@ const CreatePage = () => {
             ></input>
 
             <button
-              // onClick={}
+              onClick={()=>handleCreateStash()}
               className={BASE_TYPES.BASE_BUTTON}
             >
-              {" "}
               Create Stash
             </button>
           </div>
