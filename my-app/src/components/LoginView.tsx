@@ -1,5 +1,6 @@
 import { login } from "hooks/useUser";
 import { useState } from "react";
+import { BASE_TYPES } from "styles/baseStyles";
 import { useUserContext } from "UserContext";
 
 const LoginView = () => {
@@ -8,12 +9,12 @@ const LoginView = () => {
   // const { login } = useUserContext();
   return (
     <div className="items-center w-full p-4 m-3 outline-white">
-      <h3 className="title">Login</h3>
+      <p className={BASE_TYPES.BASE_T1}>Login</p>
       <div className="box">
         <div className="field">
           <div className="control">
             <input
-              className="input is-large text-black"
+              className={BASE_TYPES.BASE_INPUT}
               type="username"
               name="username"
               value={username}
@@ -26,7 +27,7 @@ const LoginView = () => {
         <div className="fields">
           <div className="control">
             <input
-              className="input is-large text-black"
+              className={BASE_TYPES.BASE_INPUT}
               type="password"
               name="password"
               value={password}
@@ -36,15 +37,15 @@ const LoginView = () => {
           </div>
         </div>
         <div className="field">
-          <label className="checkbox">
+          {/* <label className="checkbox">
             <input type="checkbox" name="remember" />
             Remember me
-          </label>
+          </label> */}
         </div>
         <button
           onClick={() => login(username, password)}
           // onClick={() => login()}
-          className="button is-block is-info is-large  text-black is-fullwidth bg-white"
+          className={BASE_TYPES.BASE_BUTTON}
         >
           Login
         </button>

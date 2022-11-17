@@ -12,7 +12,7 @@ const StashPage = () => {
         </div>);
 };
 
-const UserStashes = (userId:string) => {
+const UserStashes = (userId:number) => {
     const stashes = loadStashes(userId)
     return(
         <div>
