@@ -25,8 +25,7 @@ const AccountPage = () => {
       headers: headers,
     });
     setUser(res.data.user);
-    saveUserData(res.data.user.access_token);
-
+    saveUserData(res.data.user);
     console.log(user);
   };
 

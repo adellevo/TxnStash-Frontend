@@ -2,6 +2,7 @@
 // this is used in the account page
 // this component also handles the linking of new wallets
 import { MOCK_INFO } from "data/mock_info";
+import { shortenAddress } from "formatting";
 import { loadWallets } from "hooks/useUser";
 import LinkWallet from "modals/LinkWallet";
 import { useEffect, useState } from "react";
@@ -22,7 +23,7 @@ const AccountWallets = () => {
         return (
           <div key={index} className="bg-white bg-opacity-10 rounded-2xl p-3">
             <p>{wallet.name}</p>
-            <p>{wallet.address}</p>
+            <p>{shortenAddress(wallet.address)}</p>
           </div>
         );
       })}
