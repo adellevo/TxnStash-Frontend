@@ -4,11 +4,13 @@ import ModalWrapper from "./ModalWrapper";
 import copy from "copy-to-clipboard";
 import { useRef, useState } from 'react';
 import { BASE_TYPES } from 'styles/baseStyles';
+import { getUserData } from 'utils/SessionHelper';
+import { addWallet } from 'hooks/useUser';
 
 
 
 const LinkWallet = () => {
-  
+  const user = getUserData();
   const {
     connect,
     account,
@@ -17,6 +19,14 @@ const LinkWallet = () => {
     connected,
     wallet: currentWallet,
   } = useWallet();
+
+  const tryLinkWallet = () => {
+    if(user && user.userId){
+    const res = addWallet(
+      user.userId, {address:account?.address || "0x1", 
+      name:currentWallet?.adapter.name || "Default"});
+    }
+  }
 
 
   const renderWalletConnectorGroup = () => {

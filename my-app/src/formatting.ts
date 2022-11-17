@@ -1,3 +1,5 @@
+import { getUser } from "utils/SessionHelper";
+
 export const parsePayloadFunction = (funct:string) => {
     
     const func = funct.split('::');
@@ -8,6 +10,15 @@ export const formatTimestamp = (time:string)=>{
     const unix_ts = Number(time);
     const diff = (Date.now()*1000 - unix_ts)/1000000/60/60
     return diff.toFixed(1);
+}
+
+export const formatHeaders = () =>{
+  const user_token = JSON.parse(getUser()!);
+    const headers = {
+    "Access-Control-Allow-Credentials": true,
+    Authorization: `Bearer ${user_token}`,
+  };
+  return headers;
 }
 
 export const shortenAddress = (

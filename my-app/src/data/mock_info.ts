@@ -7,7 +7,7 @@ const MOCK_WALLETS = [
   {
     address: TEST_ACCOUNT_ADDRESS_0,
     userId: TEST_ACCOUNT_ID,
-    WalletId: TEST_ACCOUNT_ID,
+    walletId: 0,
     name: "Martian",
   },
   {
@@ -22,6 +22,7 @@ const MOCK_ACCOUNT = {
   userId: 0,
   username: "mock-user",
   password: "pword",
+  wallets: MOCK_WALLETS,
 };
 
 export const MOCK_INFO = {
