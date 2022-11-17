@@ -13,7 +13,7 @@ export const saveUserData = (user: any) => {
 export const getUserData = () => {
   const user = sessionStorage.getItem("user");
   if (user) {
-  return JSON.parse(user);
+    return JSON.parse(user);
   }
   return MOCK_INFO.MOCK_ACCOUNT;
 };

@@ -19,12 +19,15 @@ const LinkWallet = () => {
     connected,
     wallet: currentWallet,
   } = useWallet();
-
+  
   const tryLinkWallet = () => {
     if(user && user.userId){
-    const res = addWallet(
-      user.userId, {address:account?.address || "0x1", 
-      name:currentWallet?.adapter.name || "Default"});
+    addWallet(
+      user.userId, {address:account?.address?.toString() || "0x1", 
+      name:currentWallet?.adapter.name || "Default"})
+    .then((res) => {
+      console.log("just added wallet ", res);
+    })
     }
   }
 
@@ -57,7 +60,7 @@ const LinkWallet = () => {
         <p className=''>{currentWallet?.adapter.name}</p>
         <p className=''>{account.address?.toString()}</p>
         <button 
-          // onClick={}
+          onClick={()=>tryLinkWallet()}
         className={BASE_TYPES.BASE_BUTTON + " w-full"} >Link This Wallet </button>
 
         </div>
