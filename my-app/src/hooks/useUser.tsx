@@ -1,14 +1,27 @@
 import axios from "axios";
 import { MOCK_INFO } from "data/mock_info";
-import { formatHeaders } from "formatting";
 import { getUser, saveUser, saveUserData } from "utils/SessionHelper";
 const BACKEND_BASE_URL = "http://localhost:5000";
-export const loadStashes = async (userID: string) => {
+export const loadStashes = async (userID: number) => {
   return [];
 };
 
 export const loadWallets = (userID: number) => {
   return MOCK_INFO.MOCK_WALLETS;
+};
+
+export const addWallet = async (userID: number,wallet:any) => {
+  const headers = {
+    "Access-Control-Allow-Credentials": true,
+    Authorization: `Bearer ${JSON.parse(getUser()!)}`,
+  };
+  const res = await axios.post(
+    `${process.env.BACKEND_BASE_URL}/add-wallet`,
+    {
+      wallet: JSON.stringify(wallet),
+    },
+    {headers: headers}
+    );
 };
 
 export const login = async (username: String, password: string) => {
@@ -37,29 +50,7 @@ export const signup = async (username: String, password: string) => {
     password: password,
   });
   // console.log("REQUEST Result", res);
-  saveUser(res.data.user.auth_token);
+  saveUser(res.data.user.access_token);
   saveUserData(res.data.user);
   return res.data;
 };
-
-export const addWallet = async (userId: String, wallet: any) => {
-  const headers = formatHeaders();
-  const res = await axios.post(`${BACKEND_BASE_URL}/add-wallet`, {
-    userId: userId,
-    ...wallet
-  },{headers:headers});
-  console.log("REQUEST Result", res);
-  saveUserData(res.data.user);
-  return res.data;
-};
-
-export const removeWallet = async (userId: String, walletId: number) => {
-  const headers = formatHeaders();
-  const res = await axios.post(`${BACKEND_BASE_URL}/remove-wallet`, {
-    userId: userId,
-    walletId: walletId
-  },{headers:headers});
-  console.log("REQUEST Result", res);
-  saveUserData(res.data.user);
-  return res.data;
-}

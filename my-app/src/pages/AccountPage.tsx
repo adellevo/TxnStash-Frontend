@@ -12,6 +12,7 @@ const BACKEND_BASE_URL = "http://localhost:5000";
 
 const AccountPage = () => {
   const [user, setUser] = useState<any>("");
+  
 
   const getData = async () => {
     const headers = {

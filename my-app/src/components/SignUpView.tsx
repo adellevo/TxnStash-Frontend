@@ -1,5 +1,6 @@
 import { signup } from "hooks/useUser";
 import { useState } from "react";
+import { BASE_TYPES } from "styles/baseStyles";
 
 export default function SignUpView() {
     const [username, setUsername] = useState("");
@@ -7,13 +8,13 @@ export default function SignUpView() {
 
     return (
              <div className="items-center w-full p-4 m-3 outline-white">
-            <h3 className="title">Signup</h3>
+            <p className={BASE_TYPES.BASE_T1}>Signup</p>
             <div className="box">
 
                 <div className="field">
                     <div className="control">
                         <input
-                            className="input is-large text-black"
+                            className={BASE_TYPES.BASE_INPUT}
                             type="username"
                             name="username"
                             value={username}
@@ -26,7 +27,7 @@ export default function SignUpView() {
                 <div className="fields">
                     <div className="control">
                         <input
-                            className="input is-large text-black"
+                            className={BASE_TYPES.BASE_INPUT}
                             type="password"
                             name="password"
                             value={password}
@@ -46,7 +47,8 @@ export default function SignUpView() {
                         signup(username, password)
                         console.log(username, password)
                     }}
-                    className="button is-block is-info is-large is-fullwidth bg-white text-black px-2 py-1 m-2 ">Sign Up</button>
+                    className={BASE_TYPES.BASE_BUTTON}>
+                        Sign Up</button>
             </div>
         </div>
     )
