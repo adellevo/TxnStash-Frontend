@@ -160,7 +160,7 @@ const TxnPayload = (payload: any) => {
     const { addr, mod, scr } = parsePayloadFunction(payload.function);
     return (
         <div>
-            <p>Payload Info</p>
+            {/* <p>Payload Info</p> */}
             <div className="flex flex-row justify-start gap gap-2 p-2">
                 <p>{shortenAddress(addr)}</p>
                 <p>{mod}</p>
