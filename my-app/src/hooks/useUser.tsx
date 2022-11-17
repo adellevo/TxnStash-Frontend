@@ -1,7 +1,7 @@
 import axios from "axios";
 import { MOCK_INFO } from "data/mock_info";
 import { getUser, saveUser, saveUserData } from "utils/SessionHelper";
-const BACKEND_BASE_URL = "http://localhost:5000";
+const BACKEND_BASE_URL = "http://127.0.0.1:5000";
 export const loadStashes = async (userID: number) => {
   return [];
 };
@@ -13,12 +13,16 @@ export const loadWallets = (userID: number) => {
 export const addWallet = async (userID: number,wallet:any) => {
   const headers = {
     "Access-Control-Allow-Credentials": true,
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     Authorization: `Bearer ${JSON.parse(getUser()!)}`,
   };
   const res = await axios.post(
-    `${process.env.BACKEND_BASE_URL}/add-wallet`,
+    `${BACKEND_BASE_URL}/add-wallet`,
     {
-      wallet: JSON.stringify(wallet),
+      address: wallet.address,
+      name: wallet.name,
+      privateKey: "priv"
     },
     {headers: headers}
     );
@@ -36,19 +40,23 @@ export const login = async (username: String, password: string) => {
     {
       username: username,
       password: password,
-    }
-    // { headers: headers }
-    // { withCredentials: true }
+    },
+    { headers: headers}
   );
   saveUser(res.data.user.access_token);
   return res.data;
 };
 
 export const signup = async (username: String, password: string) => {
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    "Access-Control-Allow-Credentials": true,
+  };
   const res = await axios.post(`${BACKEND_BASE_URL}/signup`, {
     username: username,
     password: password,
-  });
+  },{headers: headers});
   // console.log("REQUEST Result", res);
   saveUser(res.data.user.access_token);
   saveUserData(res.data.user);
