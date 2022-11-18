@@ -28,6 +28,7 @@ const CreatePage = () => {
 
   const handleCreateStash = () => {
     if (selectedTransactions.length !== 0 && stashName !== "") {
+    console.log("CREATING STASH WITH ", selectedTransactions, stashName);
       sendCreateStash(
         selectedTransactions,
         stashName,
@@ -193,9 +194,10 @@ const CreatePage = () => {
                 {event_details.map((e: any) => { return e })}
               </div>)
             })}
-
-
-
+            {/* {selectedTransactions ? (
+              <div>
+                <p>Selected Transactions</p>
+                 */}
 
           </div>
         </div>

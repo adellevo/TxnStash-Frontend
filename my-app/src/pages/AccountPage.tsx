@@ -17,6 +17,7 @@ const AccountPage = () => {
   const getData = async () => {
     const headers = {
       "Access-Control-Allow-Credentials": true,
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       Authorization: `Bearer ${JSON.parse(getUser()!)}`,
     };
 

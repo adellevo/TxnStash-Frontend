@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { getUser } from "utils/SessionHelper";
+const BACKEND_BASE_URL = "http://127.0.0.1:5000";
 
 
 // const getData = async () => {
@@ -61,18 +62,19 @@ export const sendDeleteStash = async (stashID: string) => {
 export const sendCreateStash = async (transactions: any[], stashName: String, userId: number, walletId: number) => {
   const headers = {
     "Access-Control-Allow-Credentials": true,
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     Authorization: `Bearer ${JSON.parse(getUser()!)}`,
   };
+  console.log("SENDING CREATE STASH w/ headers", headers);
   const res = await axios.post(
-    `${process.env.BACKEND_BASE_URL}/create-stash`,
+    `${BACKEND_BASE_URL}/create-stash`,
     {
       transactions: transactions,
       name: stashName,
       userId: userId,
       walletId: walletId,
-      headers: headers,
-      // payload: {transactions
-    });
+    },{headers: headers});
 
 }
 
@@ -82,7 +84,7 @@ export const sendEditTxn = async (txnId: number,arg_values:any[],name="") => {
     Authorization: `Bearer ${JSON.parse(getUser()!)}`,
   };
   const res = await axios.post(
-    `${process.env.BACKEND_BASE_URL}/edit-txn`,
+    `${BACKEND_BASE_URL}/edit-txn`,
     {
       txnId: txnId,
       arg_values: arg_values,
@@ -96,7 +98,7 @@ export const sendDeleteTxn = async (txnId: number) => {
     Authorization: `Bearer ${JSON.parse(getUser()!)}`,
   };
   const res = await axios.post(
-    `${process.env.BACKEND_BASE_URL}/delete-txn`,
+    `${BACKEND_BASE_URL}/delete-txn`,
     {
       txnId: txnId,
     },
@@ -111,7 +113,7 @@ export const sendFindUses = async (userId: number,find_key:string,find_val:strin
     Authorization: `Bearer ${JSON.parse(getUser()!)}`,
   };
   const res = await axios.post(
-    `${process.env.BACKEND_BASE_URL}/find-txn`,
+    `${BACKEND_BASE_URL}/find-txn`,
     {
       userId: userId,
       find_key: find_key,//address,function,module,event
