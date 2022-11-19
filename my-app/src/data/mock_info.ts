@@ -4,6 +4,8 @@ const TEST_ACCOUNT_ADDRESS_1 = "0xba78c665ccef66de6e6ca1fd085a9a2e3e08ef65998df3
 const TEST_ACCOUNT_ID = 1;
 
 const MOCK_WALLETS = [
+  
+  
   {
     address: TEST_ACCOUNT_ADDRESS_0,
     userId: TEST_ACCOUNT_ID,
@@ -16,6 +18,15 @@ const MOCK_WALLETS = [
     WalletId: 1,
     name: "Opto-Martian",
   },
+  {
+    address: "0xdfc873cf7dc8bc99148f0704574dee49b322e7558337315a53f5b9b2758d24ea",
+    userId: TEST_ACCOUNT_ID,
+    WalletId: 1,
+    name: "Bella",
+  },
+  
+
+  
 ];
 
 const MOCK_ACCOUNT = {
