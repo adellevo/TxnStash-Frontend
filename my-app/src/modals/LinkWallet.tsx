@@ -6,16 +6,19 @@ import { useRef, useState } from 'react';
 import { BASE_TYPES } from 'styles/baseStyles';
 import { getUserData } from 'utils/SessionHelper';
 import { addWallet } from 'hooks/useUser';
+import { shortenAddress } from 'formatting';
 
 
 
 const LinkWallet = () => {
   const user = getUserData();
+  const [tempName, setTempName] = useState("");
   const {
     connect,
     account,
     wallets,
     connecting,
+    disconnect,
     connected,
     wallet: currentWallet,
   } = useWallet();
@@ -56,12 +59,17 @@ const LinkWallet = () => {
       {renderWalletConnectorGroup()}
       {connected &&account?
       <div>
-        <p className=''>{account.address?.toString()}</p>
-        <p className=''>{currentWallet?.adapter.name}</p>
-        <p className=''>{account.address?.toString()}</p>
+        <p className=''>{shortenAddress(account.address?.toString()||"0x1")}</p>
+        <input 
+          onChange={(e) => setTempName(e.target.value)}
+        type="text" className={BASE_TYPES.BASE_INPUT} value={currentWallet?.adapter.name||"default"}></input>
+        {/* <p className=''>{account.address?.toString()}</p> */}
         <button 
           onClick={()=>tryLinkWallet()}
         className={BASE_TYPES.BASE_BUTTON + " w-full"} >Link This Wallet </button>
+        <button 
+          onClick={()=>disconnect()}
+        className={BASE_TYPES.BASE_BUTTON + " w-full"} >Disconnect Wallet </button>
 
         </div>
         :<p className='text-sm text-center'>first, connect a wallet to link to your profile</p>
