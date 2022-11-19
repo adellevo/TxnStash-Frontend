@@ -1,12 +1,19 @@
+import { BASE_TYPES } from "styles/baseStyles";
 import { Stash } from "../types";
 
-const StashPreview = (stash: Stash, selectStash: (stashId: number) => void) => {
+const StashPreview = (stash: Stash, selectStash: (stash: any) => void) => {
   return (
-    <div className="stash">
-      <p>{stash.stashName}</p>
-      <p>{stash.walletId}</p>
-      <p>{stash.userId}</p>
-      <button onClick={() => selectStash(stash.stashId)}>view Stash</button>
+    <div className={"flex flex-row w-full justify-between p-2 "+BASE_TYPES.BASE_OUTLINE}>
+      <div>
+      <p>Name:{stash.name}</p>
+      <p>ID:{stash.stashId}</p>
+
+      </div>
+      <p>walletId:{stash.walletId}</p>
+      <p>userId:{stash.userId}</p>
+      <button 
+        className={BASE_TYPES.BASE_BUTTON}
+      onClick={() => selectStash(stash)}>view Stash</button>
     </div>
   );
 };

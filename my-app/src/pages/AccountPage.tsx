@@ -36,19 +36,19 @@ const AccountPage = () => {
   }, []);
 
   return (
-    <div className="items-center justify-center">
+    <div className="items-center justify-start">
       {user ? (
         <h1>Logged in as {user}</h1>
-      ) : (
+      ) : ( null
         // <h1>Logged in as {user.username}</h1>
-        <div className="flex flex-col items-center justify-center p-2">
-          <p className="text-center">Not logged in</p>
-          <Link to="/auth">
-            <button className={BASE_TYPES.BASE_BUTTON}>Authenticate</button>
-          </Link>
-        </div>
+        // <div className="flex flex-col items-center justify-center p-2">
+        //   <p className="text-center">Not logged in</p>
+        //   <Link to="/auth">
+        //     <button className={BASE_TYPES.BASE_BUTTON}>Authenticate</button>
+        //   </Link>
+        // </div>
       )}
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex flex-row justify-between items-start">
         <AccountStashes />
         <AccountWallets />
       </div>

@@ -21,7 +21,7 @@ const AccountWallets = () => {
       <p className="text-3xl text-center font-bold"> Your Wallets</p>
       {wallets.map((wallet: any, index) => {
         return (
-          <div key={index} className="bg-white bg-opacity-10 rounded-2xl p-3">
+          <div key={index} className="bg-white bg-opacity-10 rounded-2xl p-3 my-3">
             <p>{wallet.name}</p>
             <p>{shortenAddress(wallet.address)}</p>
           </div>

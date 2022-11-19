@@ -52,7 +52,7 @@ export const sendDeleteStash = async (stashID: string) => {
   const res = await axios.post(
     `${process.env.BACKEND_BASE_URL}/delete-stash`,
     {
-      stashID: stashID,
+      stashId: stashID,
     },
     { headers: headers }
   );
@@ -66,6 +66,7 @@ export const sendCreateStash = async (transactions: any[], stashName: String, us
     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     Authorization: `Bearer ${JSON.parse(getUser()!)}`,
   };
+  
   console.log("SENDING CREATE STASH w/ headers", headers);
   const res = await axios.post(
     `${BACKEND_BASE_URL}/create-stash`,
@@ -75,6 +76,11 @@ export const sendCreateStash = async (transactions: any[], stashName: String, us
       userId: userId,
       walletId: walletId,
     },{headers: headers});
+  if (res.status===200){
+    return res.data;
+  } else {
+    return {message: "Error creating stash"};
+  }
 
 }
 

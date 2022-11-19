@@ -7,9 +7,9 @@ export default function SignUpView() {
     const [password, setPassword] = useState("");
 
     return (
-             <div className="items-center w-full p-4 m-3 outline-white">
+             <div className="items-center justify-center w-full p-4 m-3 outline-2 outline rounded-2xl outline-white">
             <p className={BASE_TYPES.BASE_T1}>Signup</p>
-            <div className="box">
+            <div className="box items-center justify-center">
 
                 <div className="field">
                     <div className="control">
@@ -36,12 +36,12 @@ export default function SignUpView() {
                         />
                     </div>
                 </div>
-                <div className="field">
+                {/* <div className="field">
                     <label className="checkbox">
                         <input type="checkbox" name="remember" />
                         Remember me
                     </label>
-                </div>
+                </div> */}
                 <button
                     onClick={() => {
                         signup(username, password)

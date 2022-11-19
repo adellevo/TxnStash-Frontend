@@ -2,8 +2,26 @@ import axios from "axios";
 import { MOCK_INFO } from "data/mock_info";
 import { getUser, saveUser, saveUserData } from "utils/SessionHelper";
 const BACKEND_BASE_URL = "http://127.0.0.1:5000";
+
+const getHeaders = () => {
+  const headers = {
+    "Access-Control-Allow-Credentials": true,
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    Authorization: `Bearer ${JSON.parse(getUser()!)}`,
+  };
+  return headers;
+}
+
 export const loadStashes = async (userID: number) => {
-  return [];
+  const res = await axios.post(
+    `${BACKEND_BASE_URL}/user-stashes`,
+    {
+      userId: userID,
+    },
+    {headers: getHeaders()}
+    );
+    return res.data.stashes;
 };
 
 export const loadWallets = (userID: number) => {

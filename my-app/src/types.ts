@@ -1,4 +1,5 @@
 export type Stash = {
+  name: string;
   userId: number;
   walletId: number;
   stashName: string;

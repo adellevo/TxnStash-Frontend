@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { BASE_TYPES } from "styles/baseStyles";
 import { getUser } from "utils/SessionHelper";
 
-const TEST_USER = "0x9ee9892d8600ed0bf65173d801ab75204a16ac2c6f190454a3b98f6bcb99d915";
+const TEST_USER = "0xdfc873cf7dc8bc99148f0704574dee49b322e7558337315a53f5b9b2758d24ea";
 const CreatePage = () => {
   const user_wallets = loadWallets(0);
   const user = getUser();
@@ -26,6 +26,15 @@ const CreatePage = () => {
     });
   }, []);
 
+  const handleWalletChange = (e: any) => {
+    
+    setSelectedWallet(e.target.value);
+    loadTxs(e.target.value.address?.toString() || TEST_USER).then((res) => {
+      setWalletTransactions(res);
+      console.log("just loaded Transactions ", res);
+    });
+  }
+
   const handleCreateStash = () => {
     if (selectedTransactions.length !== 0 && stashName !== "") {
     console.log("CREATING STASH WITH ", selectedTransactions, stashName);
@@ -34,7 +43,11 @@ const CreatePage = () => {
         stashName,
         1,
         selectedWallet.walletId||1
-      );
+      ).then((res) => {
+        console.log("created stash ", res)
+        setError("Stash created");
+        });
+
     } else {
       setError("Please select at least one transaction and give your stash a name");
     }
@@ -42,13 +55,18 @@ const CreatePage = () => {
 
   const addTxn = (txn: any) => {
     const temp_txns = selectedTransactions;
-
+    const {addr,mod,scr} = parsePayloadFunction(txn.payload.function);
     const temp_map = eventMap;
     let temp_events = txn.events.map((e: any) => {
       const { addr, mod, scr } = parsePayloadFunction(e.type);
       const key = `${addr}-${mod}-${scr}`;
-      return { ...e, key: key, eventType: scr, module: mod, address: addr };
+      return { ...e, key: key, type: scr, module: mod, address: addr };
     });
+
+    let temp_args = txn.payload.arguments.map((e: any) => {
+      return { ...e, key: e.name };
+    });
+
     temp_events.forEach((e: any) => {
       if (temp_map.has(e.type)) {
         let new_val = temp_map.get(e.type);
@@ -60,7 +78,12 @@ const CreatePage = () => {
     });
     setEventMap(temp_map);
     setFoundEvents([...foundEvents, ...temp_events]);
-    setSelectedTransactions([txn, ...temp_txns]);
+    setSelectedTransactions([{...txn,
+      address:addr,
+      function:scr,
+      module:mod,
+      args : temp_args,
+      events:temp_events}, ...temp_txns]);
   };
 
   // const insertEvent
@@ -68,14 +91,17 @@ const CreatePage = () => {
   return (
     <div className={BASE_TYPES.PAGE_BASE}>
       {/* SELECT WALLET TO CREATE STASH FROM */}
-      <div className="flex flex-row justify-between p-3 justify-start">
-        <div>
-          <p className="font-bold">Select A Wallet to Import Transactions From</p>
-          <select className={BASE_TYPES.BASE_INPUT}>
+      <p className="font-bold">Select A Wallet to Import Transactions From</p>
+          <select className={BASE_TYPES.BASE_INPUT}
+            onChange={(e)=>handleWalletChange(e)}
+          >
             {user_wallets.map((wallet: any) => {
               return <option value={wallet.address}>{wallet.address}</option>;
             })}
           </select>
+      <div className="flex flex-row justify-between p-3 justify-start">
+        <div>
+        
           {walletTransactions.map((txn: any) => {
             return (
               <button onClick={() => addTxn(txn)} className={BASE_TYPES.BASE_BUTTON}>
