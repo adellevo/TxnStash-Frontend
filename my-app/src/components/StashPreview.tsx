@@ -3,7 +3,7 @@ import { Stash } from "../types";
 
 const StashPreview = (stash: Stash, selectStash: (stash: any) => void) => {
   return (
-    <div className={"flex flex-row w-full justify-between p-2 "+BASE_TYPES.BASE_OUTLINE}>
+    <div className={"flex flex-row w-full justify-between p-2 m-2 "+BASE_TYPES.BASE_OUTLINE}>
       <div>
       <p>Name:{stash.name}</p>
       <p>ID:{stash.stashId}</p>

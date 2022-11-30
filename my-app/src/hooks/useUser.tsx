@@ -61,6 +61,7 @@ export const login = async (username: String, password: string) => {
     },
     { headers: headers}
   );
+  
   saveUser(res.data.user.access_token);
   return res.data;
 };
@@ -76,7 +77,12 @@ export const signup = async (username: String, password: string) => {
     password: password,
   },{headers: headers});
   // console.log("REQUEST Result", res);
+  if(res.status === 200){
   saveUser(res.data.user.access_token);
   saveUserData(res.data.user);
   return res.data;
+  } else {
+    return res.data;
+  }
+
 };
