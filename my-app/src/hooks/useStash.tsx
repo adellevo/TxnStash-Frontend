@@ -4,53 +4,13 @@ import axios from "axios";
 import { getUser } from "utils/SessionHelper";
 const BACKEND_BASE_URL = "http://127.0.0.1:5000";
 
-
-// const getData = async () => {
-//   const headers = {
-//     "Access-Control-Allow-Credentials": true,
-//     Authorization: `Bearer ${JSON.parse(getUser()!)}`,
-//   };
-
-//   const res = await axios({
-//     method: "GET",
-//     url: `${BACKEND_BASE_URL}/profile`,
-//     headers: headers,
-//   });
-//   setUser(res.data);
-
-//   console.log(user);
-// };
-
-// useEffect(() => {
-//   getData();
-// }, []);
-
-
-// const headers = {
-//     "Access-Control-Allow-Origin": "*",
-//     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-//     "Access-Control-Allow-Credentials": true,
-//   };
-
-//   const res = await axios.post(
-//     `${BACKEND_BASE_URL}/login`,
-//     {
-//       username: username,
-//       password: password,
-//     }
-//     // { headers: headers }
-//     // { withCredentials: true }
-//   );
-//   saveUser(res.data.user.access_token);
-//   return res.data;
-
 export const sendDeleteStash = async (stashID: string) => {
   const headers = {
     "Access-Control-Allow-Credentials": true,
     Authorization: `Bearer ${JSON.parse(getUser()!)}`,
   };
   const res = await axios.post(
-    `${process.env.BACKEND_BASE_URL}/delete-stash`,
+    `${BACKEND_BASE_URL}/delete-stash`,
     {
       stashId: stashID,
     },
@@ -98,7 +58,7 @@ export const sendEditTxn = async (txnId: number,arg_values:any[],name="") => {
     },{headers: headers});
 }
 
-export const sendDeleteTxn = async (txnId: number) => {
+export const sendDeleteTxn = async (stashId:number,txnId: number) => {
   const headers = {
     "Access-Control-Allow-Credentials": true,
     Authorization: `Bearer ${JSON.parse(getUser()!)}`,
@@ -107,10 +67,27 @@ export const sendDeleteTxn = async (txnId: number) => {
     `${BACKEND_BASE_URL}/delete-txn`,
     {
       txnId: txnId,
+      stashId: stashId,
     },
     {headers: headers}
     );
 }
+
+export const sendAddTxn = async (stashId:number,txnId: number) => {
+  const headers = {
+    "Access-Control-Allow-Credentials": true,
+    Authorization: `Bearer ${JSON.parse(getUser()!)}`,
+  };
+  const res = await axios.post(
+    `${BACKEND_BASE_URL}/add-txn`,
+    {
+      stashId: stashId,
+      txnId: txnId,
+    },
+    {headers: headers}
+    );
+}
+
 
 // looks at user stashes to find stashes containing given key,val
 export const sendFindUses = async (userId: number,find_key:string,find_val:string) => {
