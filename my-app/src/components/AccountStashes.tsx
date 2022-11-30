@@ -18,19 +18,19 @@ const AccountStashes = () => {
   useEffect(() => {
     loadStashes(1).then((stashes) => {
       console.log("loaded stashes ", stashes);
-      setStashes(stashes);
+      setStashes(stashes.reverse());
       setSelected(stashes[0]);
     })
   }, []);
 
   const handleDeleteTxn = (txn: any) => {
-    sendDeleteTxn(txn.txnId).then((res) => {
+    sendDeleteTxn(txn.stashId,txn.txnId).then((res) => {
       setMessage("Successfully deleted transaction");
     });
   };
 
-  const handleDeleteStash = (txn: any) => {
-    sendDeleteStash(txn.txnId).then((res) => {
+  const handleDeleteStash = (stash: any) => {
+    sendDeleteStash(stash.stashId).then((res) => {
       console.log("deleted stash ", res);
       setMessage("Stash deleted");
     });
@@ -40,7 +40,7 @@ const AccountStashes = () => {
 
   return (
     <div className="w-1/2 items-center p-2">
-      <h1>Your Stashes</h1>
+      <p className="text-center text-4xl">Your Stashes</p>
       <div className="flex flex-col">
         <p>{message}</p>
         {stashes.map((stash: Stash) => StashPreview(stash, loadStash))}
@@ -69,16 +69,16 @@ const AccountStashes = () => {
             {txn.args.map((arg: any) => (
               <input className={BASE_TYPES.BASE_INPUT}>{arg.value}</input>
             ))}
-            </div>
+            </div> */}
             <div className="flex flex-col">
             <p>Events</p>
-            {txn.events.map((event: any) => (
-              <input className={BASE_TYPES.BASE_INPUT}>{event.event_type}</input>
+            {txn.events?.map((event: any) => (
+              <p className={BASE_TYPES.BASE_INPUT}>{event.toString()}</p>
             ))}
-            </div> */}
+            </div>
             <div className="flex flex-row justify-between">
             <button 
-            onClick = {() => handleDeleteTxn(txn.id)}
+            onClick = {() => handleDeleteTxn(txn)}
             className={BASE_TYPES.BASE_BUTTON}>Remove</button>
             <button className={BASE_TYPES.BASE_BUTTON}>update</button>
             <button className={BASE_TYPES.BASE_BUTTON}>Use</button>

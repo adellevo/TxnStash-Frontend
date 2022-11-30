@@ -1,11 +1,13 @@
 import { login } from "hooks/useUser";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BASE_TYPES } from "styles/baseStyles";
 import { useUserContext } from "UserContext";
 
 const LoginView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   // const { login } = useUserContext();
   return (
     <div className="items-center w-full p-4 m-3 outline-white">
@@ -43,7 +45,13 @@ const LoginView = () => {
           </label> */}
         </div>
         <button
-          onClick={() => login(username, password)}
+          onClick={() => {
+            login(username, password).then((res) => {
+              console.log("logged in ", res);
+              navigate("/account");
+            });
+          
+          }}
           // onClick={() => login()}
           className={BASE_TYPES.BASE_BUTTON}
         >
