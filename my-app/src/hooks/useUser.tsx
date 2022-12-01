@@ -3,7 +3,7 @@ import { MOCK_INFO } from "data/mock_info";
 import { getUser, saveUser, saveUserData } from "utils/SessionHelper";
 const BACKEND_BASE_URL = "http://127.0.0.1:5000";
 
-const getHeaders = () => {
+export const getHeaders = () => {
   const headers = {
     "Access-Control-Allow-Credentials": true,
     "Access-Control-Allow-Origin": "*",
@@ -29,12 +29,7 @@ export const loadWallets = (userID: number) => {
 };
 
 export const addWallet = async (userID: number,wallet:any) => {
-  const headers = {
-    "Access-Control-Allow-Credentials": true,
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    Authorization: `Bearer ${JSON.parse(getUser()!)}`,
-  };
+  const headers = getHeaders()
   const res = await axios.post(
     `${BACKEND_BASE_URL}/add-wallet`,
     {
@@ -46,12 +41,21 @@ export const addWallet = async (userID: number,wallet:any) => {
     );
 };
 
+export const removeWallet = async (userID: number,wallet:any) => {
+  const headers = getHeaders();
+  const res = await axios.post(
+    `${BACKEND_BASE_URL}/remove-wallet`,
+    {
+      address: wallet.address,
+      name: wallet.name,
+      privateKey: "priv"
+    },
+    {headers: headers}
+    );
+};
+
 export const login = async (username: String, password: string) => {
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-    "Access-Control-Allow-Credentials": true,
-  };
+  const headers = getHeaders();
 
   const res = await axios.post(
     `${BACKEND_BASE_URL}/login`,
