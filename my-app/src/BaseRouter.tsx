@@ -3,6 +3,7 @@ import AccountPage from "pages/AccountPage";
 import AuthPage from "pages/AuthPage";
 import CreatePage from "pages/CreatePage";
 import StashPage from "pages/StashPage";
+import StatsPage from "pages/StatsPage";
 
 import {
   createBrowserRouter,
@@ -20,6 +21,7 @@ export const BaseRouter = () => {
         <Route path="auth" element={<AuthPage />} />
         <Route path="create" element={<CreatePage />} />
         <Route path="stashes" element={<StashPage />} />
+        <Route path="stats" element={<StatsPage />} />
       </Route>
     )
   );

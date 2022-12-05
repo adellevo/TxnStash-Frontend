@@ -7,7 +7,7 @@ const MOCK_WALLETS = [
   
   
   {
-    address: TEST_ACCOUNT_ADDRESS_0,
+    address: "0x9ee9892d8600ed0bf65173d801ab75204a16ac2c6f190454a3b98f6bcb99d915",
     userId: TEST_ACCOUNT_ID,
     walletId: 0,
     name: "Martian",
@@ -24,9 +24,6 @@ const MOCK_WALLETS = [
     WalletId: 1,
     name: "Bella",
   },
-  
-
-  
 ];
 
 const MOCK_ACCOUNT = {

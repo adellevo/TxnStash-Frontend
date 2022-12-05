@@ -5,6 +5,7 @@ import { loadStashes } from "hooks/useUser";
 import { BASE_TYPES } from "styles/baseStyles";
 import { shortenAddress } from "formatting";
 import { sendDeleteStash, sendDeleteTxn } from "hooks/useStash";
+import { getUserId } from "utils/SessionHelper";
 const AccountStashes = () => {
   //
   const [stashes, setStashes] = useState<Stash[]>([]);
@@ -16,7 +17,8 @@ const AccountStashes = () => {
   };
 
   useEffect(() => {
-    loadStashes(1).then((stashes) => {
+    const userId = getUserId();
+    loadStashes(userId).then((stashes) => {
       console.log("loaded stashes ", stashes);
       setStashes(stashes.reverse());
       setSelected(stashes[0]);

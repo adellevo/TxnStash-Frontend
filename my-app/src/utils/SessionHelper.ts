@@ -18,6 +18,14 @@ export const getUserData = () => {
   return MOCK_INFO.MOCK_ACCOUNT;
 };
 
+export const getUserId = () => {
+  const user = sessionStorage.getItem("user");
+  if (user) {
+    return JSON.parse(user).id;
+  }
+  return MOCK_INFO.MOCK_ACCOUNT.userId;
+};
+
 export const clearUser = () => {
   sessionStorage.removeItem("sessionData");
 };

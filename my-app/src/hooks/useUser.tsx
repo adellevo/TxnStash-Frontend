@@ -1,8 +1,10 @@
 import axios from "axios";
 import { MOCK_INFO } from "data/mock_info";
-import { getUser, saveUser, saveUserData } from "utils/SessionHelper";
-const BACKEND_BASE_URL = "http://127.0.0.1:5000";
+// import {BACKEND_BASE_URL} from "constants";
 
+import { getUser, saveUser, saveUserData } from "utils/SessionHelper";
+
+const BACKEND_BASE_URL = "http://127.0.0.1:5000";
 export const getHeaders = () => {
   const headers = {
     "Access-Control-Allow-Credentials": true,
@@ -31,7 +33,7 @@ export const loadWallets = (userID: number) => {
 export const addWallet = async (userID: number,wallet:any) => {
   const headers = getHeaders()
   const res = await axios.post(
-    `${BACKEND_BASE_URL}/add-wallet`,
+    `${BACKEND_BASE_URL}/addwallet`,
     {
       address: wallet.address,
       name: wallet.name,

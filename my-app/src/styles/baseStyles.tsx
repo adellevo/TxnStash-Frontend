@@ -10,11 +10,14 @@ const BASE_LABEL = "text-sm text-left opacity-60 text-center text-white"
 const BASE_DIV = "bg-white bg-opacity-5 rounded-2xl p-2 m-2"
 const BASE_OUTLINE = "outline-2 outline rounded-2xl outline-white"
 
+const BASE_ROW_ITEM = "flex flex-row gap-2 items-center " + BASE_DIV
+
 export const BASE_TYPES = {
   PAGE_BASE,
   BASE_BUTTON,
   BG_GRADIENT,
   BASE_INPUT,
+  BASE_ROW_ITEM,
   BASE_DIV,
   BASE_T1,
   BASE_T2,
