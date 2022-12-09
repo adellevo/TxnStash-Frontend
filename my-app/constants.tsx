@@ -1,1 +1,0 @@
-export const FLASK_BACKEND = process.env.FLASK_BACKEND
